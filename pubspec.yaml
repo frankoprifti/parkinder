@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   graphql_flutter: ^5.1.2
   swipe_cards: ^2.0.0+1
+  provider: ^6.1.2
+  flip_card: ^0.7.0
 
 dev_dependencies:
   flutter_test:

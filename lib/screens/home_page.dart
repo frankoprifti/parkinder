@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkinder/screens/summary_view.dart';
 import 'package:parkinder/widgets/tinder_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +11,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _openSummary() {}
+  void _openSummary() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SummaryView(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Column(
+      body: const Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[TinderList()],
       ),

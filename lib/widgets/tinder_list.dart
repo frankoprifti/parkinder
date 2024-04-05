@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:parkinder/providers/summary_provider.dart';
 import 'package:parkinder/queries/read_parking_lots.dart';
 import 'package:parkinder/widgets/love_hate.dart';
 import 'package:parkinder/widgets/tinder_card.dart';
+import 'package:provider/provider.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 
 class TinderList extends StatefulWidget {
@@ -15,12 +17,12 @@ class TinderList extends StatefulWidget {
 class _TinderListState extends State<TinderList> {
   int offset = 0;
 
-  void likeAction(Map<String, dynamic> parkingLot) {
-    print('Like ${parkingLot['name']}');
+  void likeAction(Map<String, dynamic> parkingLot, BuildContext context) {
+    context.read<SummaryProvider>().vote('Like', parkingLot);
   }
 
-  void nopeAction(Map<String, dynamic> parkingLot) {
-    print('Nope ${parkingLot['name']}');
+  void nopeAction(Map<String, dynamic> parkingLot, BuildContext context) {
+    context.read<SummaryProvider>().vote('Nope', parkingLot);
   }
 
   @override
@@ -52,9 +54,9 @@ class _TinderListState extends State<TinderList> {
         }
         for (var i = 0; i < parkingLots.length; i++) {
           swipeItems.add(SwipeItem(likeAction: () {
-            likeAction(parkingLots[i]);
+            likeAction(parkingLots[i], context);
           }, nopeAction: () {
-            nopeAction(parkingLots[i]);
+            nopeAction(parkingLots[i], context);
           }));
         }
         MatchEngine matchEngine = MatchEngine(swipeItems: swipeItems);
